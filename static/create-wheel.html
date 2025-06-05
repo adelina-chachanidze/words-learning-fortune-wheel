@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create New Wheel - Words Wheel</title>
+</head>
+<body>
+    <h1>Create New Word Wheel</h1>
+    
+    <form method="POST" action="/teacher/wheel/create">
+        <div>
+            <label for="wheel-name">Wheel Name:</label><br>
+            <input type="text" id="wheel-name" name="wheel_name" placeholder="e.g. Spanish Verbs" required>
+        </div>
+        
+        <div>
+            <label for="words">Words (one per line):</label><br>
+            <textarea id="words" name="words" rows="10" cols="50" placeholder="hablar
+comer
+vivir
+estudiar
+trabajar" required></textarea>
+        </div>
+        
+        <div>
+            <button type="submit">Create Wheel</button>
+            <a href="teacher-dashboard.html">Cancel</a>
+        </div>
+    </form>
+    
+    <div>
+        <h3>Instructions:</h3>
+        <ul>
+            <li>Give your wheel a descriptive name</li>
+            <li>Add words one per line in the text area</li>
+            <li>After creating, you'll get a unique URL to share with students</li>
+        </ul>
+    </div>
+</body>
+</html>
