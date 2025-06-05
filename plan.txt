@@ -1,0 +1,99 @@
+# Words Wheel - Development Plan
+
+A language learning app with spinning word wheels for vocabulary practice.
+
+## 📋 Table of Contents
+- [Project Overview](#project-overview)
+- [Development Phases](#development-phases)
+- [Technical Architecture](#technical-architecture)
+- [Deployment Options](#deployment-options)
+- [Success Metrics](#success-metrics)
+
+## 🎯 Project Overview
+
+### Word Learning Logic
+Each word tracks two separate counters:
+- **Remember count**: Increments when student clicks "remembered"
+- **Forget count**: Increments when student clicks "forgot"
+- **Net progress**: `remember_count - forget_count`
+- **Completion**: Word disappears when net progress reaches 3
+- **Difficulty scaling**: Extra words added based on total forget count
+
+**Example**: Word starts at (0,0) → Remember twice (2,0) → Forgot once (2,1) → Net = 1, still needs 2 more net remembers
+
+## 🚀 Development Phases
+
+### Phase 1: Backend Foundation (Days 1-3)
+**Why backend first?**
+- ✅ Data structure drives everything else
+- ✅ Easier to test logic without UI complications
+- ✅ Can use simple curl commands or browser URLs to test
+- ✅ Frontend becomes much easier when backend is solid
+
+**What to build:**
+- [ ] Basic Go server with simple routing
+- [ ] CSV file handling (read/write functions)
+- [ ] Simple authentication (login/logout)
+- [ ] Test with browser URLs like `/login`, `/api/wheels`
+
+### Phase 2: Core APIs (Days 4-6)
+**Essential endpoints:**
+- [ ] `POST /login` - Authentication
+- [ ] `GET /api/wheels/:id/words` - Get words for a wheel
+- [ ] `POST /api/words/:id/remember` - Mark word as remembered
+- [ ] `POST /api/words/:id/forget` - Mark word as forgot
+- [ ] `GET /api/teacher/wheels` - Teacher's wheel management
+
+**Testing methods:**
+- Browser for GET requests
+- Postman/curl for POST requests
+- Simple HTML forms for testing
+
+### Phase 3: Minimal Frontend (Days 7-10)
+**Simple UI components:**
+- [ ] Basic HTML pages (no fancy styling yet)
+- [ ] Simple wheel display (just a list of words initially)
+- [ ] "Remember" and "Forgot" buttons
+- [ ] Test the complete flow: spin → choose → update
+
+### Phase 4: Enhanced Frontend (Days 11-14)
+**Visual polish:**
+- [ ] Actual spinning wheel animation
+- [ ] Better styling and responsive design
+- [ ] Teacher management interface
+- [ ] Error handling and user feedback
+
+## 🏗️ Technical Architecture
+
+### Data Storage (CSV Files)
+Since you prefer CSV/TXT files:
+users.csv: username,password,role
+wheels.csv: wheel_id,teacher_username,wheel_name
+words.csv: wheel_id,word_text,remember_count,forget_count,is_learned
+access.csv: student_username,wheel_id
+
+### JavaScript Clarification
+"Pure JS" = vanilla JavaScript, so you're good! No frameworks needed.
+
+### Free Hosting Solutions
+Completely Free Options:
+Option 1: Railway (Recommended)
+Free tier: 500 hours/month (enough for learning app)
+Easy Go deployment: Connect GitHub, auto-deploys
+Custom domain: yourapp.railway.app
+Students access: Just visit the URL, no localhost needed
+Option 2: Render
+Free tier: 750 hours/month
+Go support: Native Go deployment
+Custom domain: yourapp.onrender.com
+Sleeps after 15min inactivity (wakes up when accessed)
+Option 3: Fly.io
+Free tier: 3 shared VMs
+Go deployment: Simple flyctl commands
+Always-on: No sleeping
+
+### How Students Will Use It
+You deploy to Railway/Render
+You get a URL like: https://fortune-wheel.railway.app
+Students just visit that URL in their browser
+No technical knowledge needed!
